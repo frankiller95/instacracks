@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Models\Image;
+
 Route::get('/', function () {
+    /*
+    $images = Image::all();
+    foreach($images as $image) {
+        echo $image->image_path . '<br>';
+        echo $image->description . '<br>';
+        echo $image->user->name.' '.$image->user->surname . '<br>';
+        if(count($image->comments) >= 1) {
+            echo '<strong>Comentarios</strong>' . '<br>';
+            foreach($image->comments as $comment) {
+                echo $comment->user->name.' '.$comment->user->surname . '<br>';
+                echo $comment->content . '<br>';
+            }
+            
+        }
+        echo 'LIKES: ' . count($image->likes) . '<br>';
+        echo "<hr>";
+    }
+    die();
+    */
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/configuracion', [UserController::class, 'config'])->name('config');
+Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/avatar/{filename}', [UserController::class, 'getImage'])->name('user.avatar');
