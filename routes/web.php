@@ -47,3 +47,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/configuracion', [UserController::class, 'config'])->name('config');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/avatar/{filename}', [UserController::class, 'getImage'])->name('user.avatar');
+Route::get('/usuarios', [UserController::class, 'index'])->name('users.index');
+Route::get('/fetch-all', [UserController::class, 'fetchAll'])->name('users.all');
+Route::get('/user/edit', [UserController::class, 'edit'])->name('user.edit');
+//Route::post('/user/update', [UserController::class, 'up'])->name('user.updates');
